@@ -1,0 +1,10 @@
+input {
+  font-size: 2.4em;
+  background-color: transparent;
+  text-align: center;
+  -webkit-appearance: none;
+  outline: none;
+   box-shadow: none !important;
+}
+
+input:focus { outline: 0;}
