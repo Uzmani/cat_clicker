@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
   $('.cat-list li').on('click', showCat);
 });
 
@@ -54,7 +55,6 @@ function addCountListener() {
     };   
   })(cats[i].clickedCount));
 }
-
 
 
 
