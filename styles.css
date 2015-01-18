@@ -19,16 +19,9 @@ h2,h1 {
 }
 
 .cat-box img {
-<<<<<<< HEAD
-  width: 400px;
-=======
+  height: 166px;
   width: 250px;
 }
-.cat2 img {
-  height: 166px;
->>>>>>> master
-}
-
 
 .count span {
   float: left;
@@ -37,7 +30,6 @@ h2,h1 {
 
 .cat-list-wrapper {
   float: left;
-<<<<<<< HEAD
 }
 
 .cat-list {
@@ -68,8 +60,5 @@ h2,h1 {
   background: #ffceaa;
   color: #552400;;
 }
-=======
-}
 
->>>>>>> master
 
