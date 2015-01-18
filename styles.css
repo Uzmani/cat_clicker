@@ -19,11 +19,16 @@ h2,h1 {
 }
 
 .cat-box img {
+<<<<<<< HEAD
+  width: 400px;
+=======
   width: 250px;
 }
 .cat2 img {
   height: 166px;
+>>>>>>> master
 }
+
 
 .count span {
   float: left;
@@ -32,6 +37,39 @@ h2,h1 {
 
 .cat-list-wrapper {
   float: left;
+<<<<<<< HEAD
 }
 
+.cat-list {
+  padding: 0;
+}
+
+.cat-list li {
+  display: block;
+  margin: 0 0 10px 0;
+}
+
+.cat-list a {
+  min-width: 100px;
+  background: #552400;
+  padding: 10px 10px;
+  text-align: center;
+  display: block;
+  border-radius: 7px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  color: #ffceaa;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.cat-list a.active,
+.cat-list a:hover {
+  background: #ffceaa;
+  color: #552400;;
+}
+=======
+}
+
+>>>>>>> master
 
