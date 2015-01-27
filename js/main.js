@@ -21,7 +21,7 @@ cats.push(new cat('http://stylonica.com/wp-content/uploads/2014/03/cats_animals_
 
 for (var i = 0; i < cats.length; i++) {
   // appending cat html to side cat list
-  var $elem = $.parseHTML("<li><a href='#" + cats[i].name + "' data-catObj='" + JSON.stringify(cats[i]) + "'>" + cats[i].name +"</a></li>")[0];
+  var $elem = $.parseHTML("<li><a href='#'" + cats[i].name + "' data-catObj='" + JSON.stringify(cats[i]) + "'>" + cats[i].name +"</a></li>")[0];
   $('.cat-list').append($elem);
  
   var $templateClone = $('.cat-template').last().clone();
