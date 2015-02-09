@@ -29,8 +29,8 @@
     getCats: function() {
       return model.getAllCats();
     },
-    updateDisplayView: function(catName) {
-      displayView.displayCat(catName)
+    updateDisplayView: function(self) {
+      displayView.displayCat(self)
     }
   };
 
@@ -41,15 +41,13 @@
         // appending cat html to side cat list
         var $elem = $.parseHTML("<li><a href='#'" + cats[i].name + ">" + cats[i].name + "</a></li>")[0];
         $('.cat-list').append($elem);
-        $('.cat-list li').on('click', (function(catName) {
-          return function() {
-            controller.updateDisplayView(catName);
-            console.log(catName);
-          };
-        })(cats[i].name))
       }
-    }
-
+      $('.cat-list li').on('click', function(){
+        $('.cat-list a').removeClass('active');
+        $(this).find('a').addClass('active');
+        controller.updateDisplayView($(this)); 
+      });    
+    } 
   };
 
   var displayView = {
@@ -69,14 +67,10 @@
       }
 
     },
-    displayCat: function(catName) {
-      // console.log(catName);
+    displayCat: function(self) {
       $('.cat-display .cat-template').hide();
-      $('.cat-template').each(function(i){
-        if (catName === $(this).find('h2').text()) {
-          $(this).show();
-        }
-      });
+      var catName = self.find('a').html();
+      $("h2:contains(" + catName +")").closest('.cat-template').show();
     }
 
   };
