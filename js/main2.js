@@ -1,4 +1,4 @@
-// $(function() {
+$(function() {
   
   var cats = [];
   var cat = function(img, name) {
@@ -18,13 +18,26 @@
       localStorage.cats = JSON.stringify(cats);
     },
     getAllCats: function() {
-      return JSON.parse(localStorage.cats);
+      return cats;
     },
     adminSetTrue: function() {
       cats[controller.currentCat].admin = true;
     },
     adminSetFalse: function() {
       cats[controller.currentCat].admin = false;
+    },
+    newCatInfo: function(newName, url, count) {
+      var updatedCat = cats[controller.currentCat];
+      updatedCat.admin = false;
+      if(url != '') {
+        updatedCat.imgURL = url;
+      }
+      if(count != '') {
+        updatedCat.clickedCount = count;
+      } 
+      if(newName != '') {
+        updatedCat.name = newName;
+      };
     }
   };
 
@@ -39,9 +52,9 @@
     getCats: function() {
       return model.getAllCats();
     },
-    updateDisplayView: function(cat) {
-      // console.log(currentCat);
-      displayView.render(cat)
+    updateDisplayView: function() {
+      displayView.render();
+      adminView.render();
     },
     openAdminView: function(){
       model.adminSetTrue();
@@ -49,10 +62,14 @@
     },
     closeAdminview: function() {
       model.adminSetFalse();
-      amdinView.hide();
+      adminView.hide();
     },
-    updateCatInfo: function() {
-
+    updateCatInfo: function(catName, imgUrl, clickCount) {
+      model.newCatInfo(catName, imgUrl, clickCount);
+      displayView.init();
+      displayView.render();
+      listView.init();
+      adminView.render();
     },
 
     "currentCat": 0
@@ -60,29 +77,26 @@
 
   var listView = {
     init: function() {
+      var $list = $('.cat-list')
+      $list.empty();
       var cats = controller.getCats();
       for (var i = 0; i < cats.length; i++) {
         // appending cat html to side cat list
         var elem = $.parseHTML("<li><a href='#'" + cats[i].name + ">" + cats[i].name + "</a></li>")[0];
-        $('.cat-list').append(elem);
+        $list.append(elem);
         $(elem).on('click', (function(cat) {
           return function() {
             controller.currentCat = cat;
             controller.updateDisplayView(controller.currentCat);
           };
         })(i));
-      }
-      // $('.cat-list li').on('click', function(){
-      //   $('.cat-list a').removeClass('active');
-      //   $(this).find('a').addClass('active');
-      //   console.log($(this))
-      //   controller.updateDisplayView($(this)); 
-      // });    
+      }  
     } 
   };
 
   var displayView = {
     init: function() {
+      $('.cat-display').empty();
       for (var i = 0; i < cats.length; i++) {
         var $templateClone = $('.cat-template').last().clone();
         $templateClone.find('h2').html(cats[i].name);
@@ -96,14 +110,10 @@
           };
         })(cats[i]));
       }
-
     },
-    render: function(cat) {
-      // console.log(controller.currentCat);
-      var cats = controller.getCats();
-      var currentCat = cats[controller.currentCat]  ;
+    render: function() {
+      var catName = cats[controller.currentCat].name;
       $('.cat-display .cat-template').hide();
-      var catName = currentCat.name;
       $("h2:contains(" + catName +")").closest('.cat-template').show();
     }
   };
@@ -117,27 +127,33 @@
       $(".cancel").on("click", function(e){
         controller.closeAdminview();
       })
+      $(".save").on("click", function(e) {
+        e.preventDefault();
+        adminView.grabInputVals();
+      })
     },
     render: function() {
-      console.log(cats[controller.currentCat].admin);
+      var $form = $("#change-form");
       if (cats[controller.currentCat].admin === true) {
-        console.log("inside if statement")
-        $("#change-form").show();
+        $form.show();
+      }else {
+        $form.hide();
       }
     },
     hide: function() {
       $("#change-form").hide();
+    },
+    grabInputVals: function() {
+      var newCatName = $('input[name="catname"]').val();
+      var newImgUrl = $('input[name="imgUrl"]').val();
+      var newClickCount = $('input[name="clickCount"]').val();
+      controller.updateCatInfo(newCatName, newImgUrl, newClickCount)
+      $('#change-form input').val('');  
     }
   }
 
 
   controller.init();
 
-// -model will store whether admin view showing? true or false
 
-// - based on admin true or false, the view will display the form elements
-
-// - controller: opening admin view, closing view when cancel, updating the cat infomation when save
-
-
-// });
+});
