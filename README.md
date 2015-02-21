@@ -1,3 +1,3 @@
 # cat_clicker
 
-This is app built with OOJS MVC structure
+This is app is built with OOJS MVC structure
