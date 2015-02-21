@@ -1,6 +1,14 @@
 
 body { font: 1em helvetica; background: #aa6939;}
-body, h1{ margin: 0; padding: 0; }
+body, h1{ margin: 0; padding: 20px 0; }
+
+/*CLEARFIX*/
+.cat-display:after, 
+.cat-list-wrapper:after {
+  clear: both;
+  content: '';
+  display: table;
+}
 
 h2,h1 {
   color: #552400;
@@ -61,4 +69,31 @@ h2,h1 {
   color: #552400;;
 }
 
+
+
+.admin-btn a {
+  width: 100px;
+  background: #000;
+  padding: 10px 10px;
+  text-align: center;
+  display: block;
+  border-radius: 7px;
+  color: #ffceaa;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+input[type="text"] {
+  display: block;
+  width: 200px;
+  height: 30px;
+  margin: 10px 0;
+}
+
+#change-form {
+  display: none;
+  position: relative;
+  left: 200px ;
+}
+}
 
